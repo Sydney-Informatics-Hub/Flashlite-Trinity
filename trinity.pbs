@@ -1,0 +1,47 @@
+#! /bin/bash
+
+#PBS -A <account>
+#PBS -l walltime=168:00:00
+#PBS -l select=1:ncpus=24:mem=250gb
+#PBS -N <job_name>
+
+set -e
+
+module load singularity/2.5.2
+
+mem='250G'
+
+# Set trap
+# EXIT runs on any exit, signalled or not.
+finish(){
+		echo "$(date): Archiving ${sampleout} in ${TMPDIR} to ${outpath}/${sampleout}.tar.gz"
+		cd ${TMPDIR}
+		rm -rf ${sampleout}/read_partitions
+		tar -cvzf "${outpath}/${sampleout}.tar.gz" "${sampleout}"
+                echo "$(date): Saved to ${outpath}/${sampleout}.tar.gz"
+}
+trap finish EXIT
+
+# Set variables
+sample=<sample_name>
+sampleout=${sample}_trinity_v2.8.4
+outpath=/30days/rosemariesadsad/tracy
+simg=/30days/rosemariesadsad/nat/trint.simg
+first=<path_to_fastq1>
+second=<path_to_fastq2>
+
+export LOCALOUT=${TMPDIR}/${sampleout}
+mkdir -p ${LOCALOUT}
+
+# Run trinity, stop after inchworm, do not run chrysalis
+singularity exec -B ${TMPDIR} ${simg} Trinity \
+		--seqType fq \
+                --max_memory ${mem} \
+                --left ${first} \
+                --right ${second} \
+                 --no_normalize_reads \
+                --CPU ${NCPUS} \
+                --output ${LOCALOUT} \
+                --verbose
+
+echo "$(date): Finished trinity"
