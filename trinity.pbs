@@ -3,8 +3,28 @@
 #########################################################
 # 
 # Platform: UQ Flashlite 
-# Description: Run trinity de novo transcriptome assembly
+# Description: 
+#	Trinity de novo transcriptome assembly
+# Trinity user guide and references: 
+# 	https://github.com/trinityrnaseq/trinityrnaseq/wiki
 # Details:
+#	This PBS script runs trinity de novo transcriptome
+# 	assembly on University of Queensland's Flashlite HPC.
+# Usage: 
+#	Edit the script replacing everything in <> with your
+#	inputs and options. Edit compute resource requests 
+# 	at the #PBS directives and the mem variable (if required)
+# 	using the guide below
+# Singularity containers:
+#	https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/
+# Compute resources: 
+#	For single sample assemblies, use:
+#	select=1:ncpus=24:mem=250gb
+#	mem='250G'
+#	For global assemblies, use staged scripts for more efficient
+#	utilization of resources. Or:
+# 	select=1:ncpus=24:mem=500gb
+# 	mem='500G'
 #
 # If you use this script towards a publication, please acknowledge the
 # Sydney Informatics Hub (or co-authorship, where appropriate).
@@ -27,10 +47,9 @@ set -e
 
 module load singularity/2.5.2
 
+## EDIT MEM IF REQUIRED
 mem='250G'
 
-# Set trap
-# EXIT runs on any exit, signalled or not.
 finish(){
 		echo "$(date): Archiving ${sampleout} in ${TMPDIR} to ${outpath}/${sampleout}.tar.gz"
 		cd ${TMPDIR}
@@ -40,18 +59,19 @@ finish(){
 }
 trap finish EXIT
 
-# Set variables
+## SET VARIABLES: REPLACE <>
 sample=<sample_name>
-sampleout=${sample}_trinity_v2.8.4
-outpath=/30days/rosemariesadsad/tracy
-simg=/30days/rosemariesadsad/nat/trint.simg
+outpath=<path_to_output>
+simg=<path_to_container>
 first=<path_to_fastq1>
 second=<path_to_fastq2>
 
+# Do not edit
 export LOCALOUT=${TMPDIR}/${sampleout}
 mkdir -p ${LOCALOUT}
+sampleout=${sample}_trinity_v2.8.4
 
-# Run trinity, stop after inchworm, do not run chrysalis
+## RUN TRINITY 
 singularity exec -B ${TMPDIR} ${simg} Trinity \
 		--seqType fq \
                 --max_memory ${mem} \
