@@ -67,7 +67,8 @@ first=<path_to_fastq1>
 second=<path_to_fastq2>
 
 # Do not edit
-sampleout=${sample}_trinity_v2.8.4
+ver=`echo ${simg} | perl -pe 's/trinityrnaseq\.(v.*)\.simg/$1/g'`
+sampleout=${sample}_trinity_${ver}
 export LOCALOUT=${TMPDIR}/${sampleout}
 mkdir -p ${LOCALOUT}
 
