@@ -67,9 +67,9 @@ first=<path_to_fastq1>
 second=<path_to_fastq2>
 
 # Do not edit
+sampleout=${sample}_trinity_v2.8.4
 export LOCALOUT=${TMPDIR}/${sampleout}
 mkdir -p ${LOCALOUT}
-sampleout=${sample}_trinity_v2.8.4
 
 ## RUN TRINITY 
 singularity exec -B ${TMPDIR} ${simg} Trinity \
