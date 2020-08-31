@@ -1,5 +1,23 @@
 #! /bin/bash
 
+#########################################################
+# 
+# Platform: UQ Flashlite 
+# Description: Run trinity de novo transcriptome assembly
+# Details:
+#
+# If you use this script towards a publication, please acknowledge the
+# Sydney Informatics Hub (or co-authorship, where appropriate).
+#
+# Suggested acknowledgement:
+# The authors acknowledge the scientific and technical assistance 
+# <or e.g. bioinformatics assistance of <PERSON>> of Sydney Informatics
+# Hub and resources and services from the National Computational 
+# Infrastructure (NCI), which is supported by the Australian Government
+# with access facilitated by the University of Sydney.
+# 
+#########################################################
+
 #PBS -A <account>
 #PBS -l walltime=168:00:00
 #PBS -l select=1:ncpus=24:mem=250gb
