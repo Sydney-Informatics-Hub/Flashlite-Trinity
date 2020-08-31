@@ -1,15 +1,45 @@
 #! /bin/bash
 
-#PBS -A NCMAS-ch81
-#PBS -l walltime=01:00:00
-#PBS -l select=1:ncpus=4:mem=4gb
+#########################################################
+# 
+# Platform: UQ Flashlite 
+# Description: 
+#	Trinity de novo transcriptome assembly
+# Trinity user guide and references: 
+# 	https://github.com/trinityrnaseq/trinityrnaseq/wiki
+# Details:
+#	This PBS script runs trinity de novo transcriptome
+# 	assembly on University of Queensland's Flashlite HPC.
+# Usage: 
+#	Edit the script replacing everything in <> with your
+#	inputs and options. Edit compute resource requests 
+# 	at the #PBS directives and the mem variable (if required)
+# 	using the guide below
+# Singularity containers:
+#	https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/
+#
+# If you use this script towards a publication, please acknowledge the
+# Sydney Informatics Hub (or co-authorship, where appropriate).
+#
+# Suggested acknowledgement:
+# The authors acknowledge the scientific and technical assistance 
+# <or e.g. bioinformatics assistance of <PERSON>> of Sydney Informatics
+# Hub and resources and services from the National Computational 
+# Infrastructure (NCI), which is supported by the Australian Government
+# with access facilitated by the University of Sydney.
+# 
+#########################################################
+
+#PBS -A <account>
+#PBS -l walltime=24:00:00
+#PBS -l select=1:ncpus=24:mem=500gb
 #PBS -N Trinity_job1
 
 set -e
 
 module load singularity/2.5.2
 
-mem='4G'
+mem='500G'
 
 # Set trap
 # EXIT runs on any exit, signalled or not.
@@ -23,19 +53,17 @@ finish(){
 }
 trap finish EXIT
 
-# Set variables
-sample=Test
-sampleout=${sample}_trinity_v2.8.4
-outpath=/30days/rosemariesadsad/tracy/SIH-Flashlite-Trinity/Test_vanilla
-simg=/30days/rosemariesadsad/nat/trint.simg
-first=/30days/rosemariesadsad/tracy/SIH-Flashlite-Trinity/sample_data/reads.left.fq.gz
-second=/30days/rosemariesadsad/tracy/SIH-Flashlite-Trinity/sample_data/reads.right.fq.gz
+## SET VARIABLES: REPLACE <>
+sample=<sample_name>
+outpath=<path_to_output>
+simg=<path_to_container>
+first=<path_to_fastq1>
+second=<path_to_fastq2>
 
-# Create working dir in TMPDIR
+# Do not edit
+sampleout=${sample}_trinity_v2.8.4
 export LOCALOUT=${TMPDIR}/${sampleout}
 mkdir -p ${LOCALOUT}
-
-# Output at end of run stored here
 mkdir -p ${outpath}/${sampleout}
 
 # Run trinity, stop after inchworm, do not run chrysalis
