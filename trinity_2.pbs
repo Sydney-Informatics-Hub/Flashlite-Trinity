@@ -5,7 +5,8 @@
 # Platform: UQ Flashlite 
 # Description: 
 #	Trinity de novo transcriptome assembly.
-#	This PBS script runs trinity de novo transcriptome
+#	This PBS script is part of the Staged Trinity workflow
+#	that executes Trinity de novo transcriptome
 # 	assembly on University of Queensland's Flashlite HPC.
 # Usage: 
 #	Run this script when trinity_1.pbs has completed successfully.
