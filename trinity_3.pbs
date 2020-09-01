@@ -1,20 +1,19 @@
-# /bin/bash
+#! /bin/bash
 
 #########################################################
 # 
 # Platform: UQ Flashlite 
 # Description: 
-#	Trinity de novo transcriptome assembly
-# Trinity user guide and references: 
-# 	https://github.com/trinityrnaseq/trinityrnaseq/wiki
-# Details:
-#	This PBS script runs trinity de novo transcriptome
+#	Trinity de novo transcriptome assembly.
+#	This PBS script is part of the Staged Trinity workflow
+#	that executes Trinity de novo transcriptome
 # 	assembly on University of Queensland's Flashlite HPC.
 # Usage: 
+#	Run this script when trinity_2.pbs has completed successfully.
 #	Edit the script replacing everything in <> with your
-#	inputs and options. Edit compute resource requests 
-# 	at the #PBS directives and the mem variable (if required)
-# 	using the guide below
+#	inputs and options. 
+# Outputs:
+	Trinity.fasta, Trinity.fasta.gene_trans_map, Trinity.fasta.stats
 # Singularity containers:
 #	https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/
 #
@@ -23,21 +22,22 @@
 #
 # Suggested acknowledgement:
 # The authors acknowledge the scientific and technical assistance 
-# <or e.g. bioinformatics assistance of <PERSON>> of Sydney Informatics
-# Hub and resources and services from the National Computational 
-# Infrastructure (NCI), which is supported by the Australian Government
-# with access facilitated by the University of Sydney.
+# <or e.g. bioinformatics assistance of > of Sydney Informatics Hub, the 
+# University of Sydney and resources and services provided by the 
+# University of Queensland.
 # 
 #########################################################
 
 #PBS -A <account>
 #PBS -l walltime=336:00:00
-#PBS -l select=1:ncpus=24:mem=500gb
+#PBS -l select=1:ncpus=24:mem=192gb
 #PBS -N Trinity_job3
 
 set -e
 
-mem='500G'
+module load singularity/3.5.0
+
+mem='192G'
 
 # Set trap
 # EXIT runs on any exit, signalled or not.
@@ -58,9 +58,10 @@ simg=<path_to_container>
 first=<path_to_fastq1>
 second=<path_to_fastq2>
 
-# DO NOT EDIT
+# Do not edit
 # Unpack trinity_1.tar to TMPDIR
-sampleout=${sample}_trinity_v2.8.4
+ver=`echo ${simg} | perl -pe 's/^.*trinityrnaseq\.(v.*)\.simg/$1/g'`
+sampleout=${sample}_trinity_${ver}
 export LOCALOUT=${TMPDIR}/${sampleout}
 mkdir -p ${LOCALOUT}
 tar -xf ${outpath}/${sampleout}/trinity_2.tar -C ${LOCALOUT}
@@ -68,7 +69,7 @@ mv ${LOCALOUT}/trinity_2/* ${LOCALOUT}
 rm -rf ${LOCALOUT}/trinity_2
 cd ${LOCALOUT}
 
-# DO NOT EDIT
+# Do not edit
 echo "$(date): Create new partitioned_reads.files.list containing new paths..."
 find ${PWD}/ -iname '*trinity.reads.fa' > partitioned_reads.files.list
 echo "$(date): Updating paths for recursive_trinity.cmds"
