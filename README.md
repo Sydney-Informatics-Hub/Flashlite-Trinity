@@ -16,6 +16,7 @@ Both workflows are easy to set up (use singularity containers) and make use of F
 # User Guide
 
 1. Clone this repository into your working directory on Flashlite by:
+
   `git clone https://github.com/Sydney-Informatics-Hub/Flashlite-Trinity.git`
 2. [Download a Trinity singularity container provided by the BROAD](https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/) onto Flashlite. 
    * Note, workflows have only been tested for trinityrnaseq.v2.9.1.simg, trinityrnaseq.v2.11.0.simg. These containers are only compatible with Singularity v3.
@@ -28,7 +29,7 @@ If you use this script towards a publication, please acknowledge the Sydney Info
 
 __Suggested acknowledgement:__
 
-The authors acknowledge the scientific and technical assistance <or e.g. bioinformatics assistance of <PERSON>> of Sydney Informatics Hub and resources and services from the University of Queensland.
+The authors acknowledge the scientific and technical assistance <or e.g. bioinformatics assistance of <PERSON>> of Sydney Informatics Hub, the University of Sydney and resources and services provided by the University of Queensland.
 
 # References
 
