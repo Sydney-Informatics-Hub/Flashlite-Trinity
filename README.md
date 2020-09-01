@@ -6,6 +6,7 @@ This respository contains two workflows that run Trinity on the [University of Q
 1. Trinity
     * PBS script: trinity.pbs
     * Recommended for single sample assemblies or smaller assemblies with <500Gb memory 
+    
 2. Staged Trinity
     * PBS scripts: trinity_1.pbs, trinity_2.pbs, trinity_3.pbs
     * Recommended for global assemblies with multiple sample inputs 
@@ -18,9 +19,12 @@ Both workflows are easy to set up (use singularity containers) and make use of F
 1. Clone this repository into your working directory on Flashlite by:
 
   `git clone https://github.com/Sydney-Informatics-Hub/Flashlite-Trinity.git`
+  
 2. [Download a Trinity singularity container provided by the BROAD](https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/) onto Flashlite. 
    * Note, workflows have only been tested for trinityrnaseq.v2.9.1.simg, trinityrnaseq.v2.11.0.simg. These containers are only compatible with Singularity v3.
+   
 3. Chose your workflow (Trinity of Staged Trinity) and edit the PBS script(s) for the workflow as instructed in the headers
+
 4. Submit your job!
 
 # Acknowledge us
