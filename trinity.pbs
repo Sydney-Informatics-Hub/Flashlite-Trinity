@@ -41,11 +41,11 @@
 #PBS -A <account>
 #PBS -l walltime=168:00:00
 #PBS -l select=1:ncpus=24:mem=250gb
-#PBS -N <job_name>
+#PBS -N Trinity
 
 set -e
 
-module load singularity/2.5.2
+module load singularity/3.5.0
 
 ## EDIT MEM IF REQUIRED
 mem='250G'
@@ -54,6 +54,7 @@ finish(){
 		echo "$(date): Archiving ${sampleout} in ${TMPDIR} to ${outpath}/${sampleout}.tar.gz"
 		cd ${TMPDIR}
 		rm -rf ${sampleout}/read_partitions
+		singularity exec ${simg} perl /usr/local/bin/trinityrnaseq/util/TrinityStats.pl ${sampleout}/Trinity.fasta > ${sampleout}/Trinity.fasta.stats
 		tar -cvzf "${outpath}/${sampleout}.tar.gz" "${sampleout}"
                 echo "$(date): Saved to ${outpath}/${sampleout}.tar.gz"
 }
@@ -67,7 +68,7 @@ first=<path_to_fastq1>
 second=<path_to_fastq2>
 
 # Do not edit
-ver=`echo ${simg} | perl -pe 's/trinityrnaseq\.(v.*)\.simg/$1/g'`
+ver=`echo ${simg} | perl -pe 's/^.*trinityrnaseq\.(v.*)\.simg/$1/g'`
 sampleout=${sample}_trinity_${ver}
 export LOCALOUT=${TMPDIR}/${sampleout}
 mkdir -p ${LOCALOUT}
