@@ -13,8 +13,8 @@
 # Usage: 
 #	Edit the script replacing everything in <> with your
 #	inputs and options. Edit compute resource requests 
-# 	at the #PBS directives and the mem variable (if required)
-# 	using the guide below
+# 	at the #PBS directives and the mem variable (if required). 
+#	See "Compute Resources" for guidance.
 # Singularity containers:
 #	https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/
 # Compute resources: 
@@ -31,10 +31,9 @@
 #
 # Suggested acknowledgement:
 # The authors acknowledge the scientific and technical assistance 
-# <or e.g. bioinformatics assistance of <PERSON>> of Sydney Informatics
-# Hub and resources and services from the National Computational 
-# Infrastructure (NCI), which is supported by the Australian Government
-# with access facilitated by the University of Sydney.
+# <or e.g. bioinformatics assistance of > of Sydney Informatics Hub, the 
+# University of Sydney and resources and services provided by the 
+# University of Queensland.
 # 
 #########################################################
 
