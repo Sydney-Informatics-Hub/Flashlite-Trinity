@@ -5,7 +5,7 @@ This respository contains two workflows that run Trinity on the [University of Q
 
 1. Trinity
     * PBS script: trinity.pbs
-    * Recommended for single sample assemblies or smaller assemblies with <500Gb memory 
+    * Recommended for single sample assemblies or smaller assemblies that require <500Gb memory 
     
 2. Staged Trinity
     * PBS scripts: trinity_1.pbs, trinity_2.pbs, trinity_3.pbs
