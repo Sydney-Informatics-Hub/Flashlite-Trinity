@@ -21,7 +21,7 @@ Both workflows are easy to set up (use singularity containers) and make use of F
   `git clone https://github.com/Sydney-Informatics-Hub/Flashlite-Trinity.git`
   
 2. [Download a Trinity singularity container provided by the BROAD](https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/) onto Flashlite. 
-   * Note, workflows have only been tested for trinityrnaseq.v2.9.1.simg, trinityrnaseq.v2.11.0.simg. These containers are only compatible with Singularity v3.
+   * Note, workflows have only been tested with versions [trinityrnaseq.v2.9.1.simg](https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/trinityrnaseq.v2.9.0.simg) and [trinityrnaseq.v2.11.0.simg](https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/trinityrnaseq.v2.11.0.simg). These containers are only compatible with Singularity v3.
    
 3. Chose your workflow (Trinity of Staged Trinity) and edit the PBS script(s) for the workflow as instructed in the headers
 
