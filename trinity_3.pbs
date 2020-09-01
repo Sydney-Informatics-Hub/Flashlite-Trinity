@@ -13,7 +13,7 @@
 #	Edit the script replacing everything in <> with your
 #	inputs and options. 
 # Outputs:
-	Trinity.fasta, Trinity.fasta.gene_trans_map, Trinity.fasta.stats
+#	Trinity.fasta, Trinity.fasta.gene_trans_map, Trinity.fasta.stats
 # Singularity containers:
 #	https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/
 #
