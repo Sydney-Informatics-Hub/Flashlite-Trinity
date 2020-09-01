@@ -4,17 +4,13 @@
 # 
 # Platform: UQ Flashlite 
 # Description: 
-#	Trinity de novo transcriptome assembly
-# Trinity user guide and references: 
-# 	https://github.com/trinityrnaseq/trinityrnaseq/wiki
-# Details:
+#	Trinity de novo transcriptome assembly.
 #	This PBS script runs trinity de novo transcriptome
 # 	assembly on University of Queensland's Flashlite HPC.
 # Usage: 
+#	Run this script when trinity_1.pbs has completed successfully.
 #	Edit the script replacing everything in <> with your
-#	inputs and options. Edit compute resource requests 
-# 	at the #PBS directives and the mem variable (if required)
-# 	using the guide below
+#	inputs and options. 
 # Singularity containers:
 #	https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/
 #
@@ -23,10 +19,9 @@
 #
 # Suggested acknowledgement:
 # The authors acknowledge the scientific and technical assistance 
-# <or e.g. bioinformatics assistance of <PERSON>> of Sydney Informatics
-# Hub and resources and services from the National Computational 
-# Infrastructure (NCI), which is supported by the Australian Government
-# with access facilitated by the University of Sydney.
+# <or e.g. bioinformatics assistance of > of Sydney Informatics Hub, the 
+# University of Sydney and resources and services provided by the 
+# University of Queensland.
 # 
 #########################################################
 
@@ -37,7 +32,7 @@
 
 set -e
 
-module load singularity/2.5.2
+module load singularity/3.5.0
 
 mem='500G'
 
@@ -62,7 +57,8 @@ first=<path_to_fastq1>
 second=<path_to_fastq2>
 
 # Do not edit
-sampleout=${sample}_trinity_v2.8.4
+ver=`echo ${simg} | perl -pe 's/^.*trinityrnaseq\.(v.*)\.simg/$1/g'`
+sampleout=${sample}_trinity_${ver}
 export LOCALOUT=${TMPDIR}/${sampleout}
 mkdir -p ${LOCALOUT}
 tar -xf ${outpath}/${sampleout}/trinity_1.tar -C ${LOCALOUT}
