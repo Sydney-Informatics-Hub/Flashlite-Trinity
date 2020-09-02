@@ -13,7 +13,9 @@
 #	Edit the script replacing everything in <> with your
 #	inputs and options. For very large assemblies (e.g. global
 # 	mammalian transcriptomes), increase memory by setting
-# 	#PBS -l select=1:ncpus=24:mem=750gb and mem='750G'
+# 	#PBS -l select=1:ncpus=24:mem=500gb and mem='500G'
+#	Typically, <200Gb memory and <24hours walltime is expected
+#	for a global mammalian assembly
 # Singularity containers:
 #	https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/
 #
@@ -29,7 +31,7 @@
 #########################################################
 
 #PBS -A <account>
-#PBS -l walltime=72:00:00
+#PBS -l walltime=48:00:00
 #PBS -l select=1:ncpus=24:mem=500gb
 #PBS -N Trinity_job2
 
